@@ -80,7 +80,7 @@ import axios from 'axios';
 import moment from 'moment';
 import download from 'downloadjs';
 
-const baseUrl = process.env.BASE_URL || '';
+const baseUrl = process.env.BASE_URL || '/api';
 const inboxProviderMap = {
     'gmail'  : 'https://mail.google.com',
     'ymail'  : 'https://mail.yahoo.com',

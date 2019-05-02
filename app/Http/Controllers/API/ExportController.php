@@ -26,7 +26,7 @@ class ExportController extends Controller
         $this->singlePageTemplate = file_get_contents(__DIR__ . '/templates/single.html');
         $this->mailTemplate = file_get_contents(__DIR__ . '/templates/mail.html');
 
-        $this->imageLocMap = [
+        $this->imgLocMap = [
             'chart-container-map' => 'chart_image_0',
             'chart-container-top-adv' => 'chart_image_1',
             'chart-container-reg' => 'chart_image_2',
@@ -82,24 +82,26 @@ class ExportController extends Controller
     public function mailDashboard(Request $request)
     {
         $parsedConfigs = $request->input('chartConfigs');
-        $headerText = $request->input('headerText');
         $filter = $request->input('filter');
+        $headerText = $request->input('headerText');
         $mailId = $request->input('mailId');
 
         $files = $this->convertChartConfigsToImages($parsedConfigs);
 
         $fileUrls = $this->uploadFilesToS3($files);
 
-        $templateContent = $this->buildMailTemplate($fileUrls, $parsedConfigs, $headerText, $filter);
+        $templateContent = $this->buildMailTemplate($fileUrls, $parsedConfigs, $headerText, (object) $filter);
 
         $this->sendMail($templateContent, $mailId);
     }
 
     private function convertChartConfigsToImages($chartConfigs)
     {
-        $chartConfig = array_map(function ($config) {
-            $config->width = $this->chartDimMap[$config->renderAt]->width;
-            $config->height = $this->chartDimMap[$config->renderAt]->height;
+        $chartConfigs = array_map(function ($config) {
+            $config = (object) $config;
+            $config->width = $this->chartDimMap[$config->renderAt]['width'];
+            $config->height = $this->chartDimMap[$config->renderAt]['height'];
+            return $config;
         }, $chartConfigs);
 
         $exportManager = new ExportManager();
@@ -109,7 +111,7 @@ class ExportController extends Controller
         $exportConfig->set('quality', 'good');
         $exportConfig->set('type', 'png');
 
-        return $exportManager->export(exportConfig, sys_get_temp_dir(), true);
+        return $exportManager->export($exportConfig, sys_get_temp_dir(), true);
     }
 
     private function uploadFilesToS3($files)
@@ -156,7 +158,7 @@ class ExportController extends Controller
 
         foreach ($configs as $idx => $config) {
             $url = $fileUrls[$idx];
-            $templateData[$this->imgLocMap[$config->renderAt]] = $url;
+            $templateData[$this->imgLocMap[$config['renderAt']]] = $url;
         }
 
         $tmpl = $this->mailTemplate;

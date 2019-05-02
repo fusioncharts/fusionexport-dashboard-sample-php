@@ -14,4 +14,4 @@ use Illuminate\Http\Request;
 */
 
 Route::post('export/singlepage', 'API\ExportController@singlepage');
-Route::post('export/mail', 'API\ExportController@mail');
+Route::post('export/mail', 'API\ExportController@mailDashboard');

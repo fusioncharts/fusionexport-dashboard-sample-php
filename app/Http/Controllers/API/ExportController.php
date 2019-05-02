@@ -58,7 +58,7 @@ class ExportController extends Controller
         ];
     }
 
-    public function singlepage(Request $request)
+    public function downloadDashboard(Request $request)
     {
         $headerText = $request->input('headerText');
         $chartConfigs = $request->input('chartConfigs');

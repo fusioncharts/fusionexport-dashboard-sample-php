@@ -159,7 +159,7 @@ export default {
         },
 
         async multiDashboard() {
-            const url = `${baseUrl}/export/multipage`;
+            const url = `${baseUrl}/export/download-multipage-dashboard`;
             const headerText = this.getHeaderText();
             const chartConfigs = Object.values(this.chartConfig);
 
@@ -224,7 +224,7 @@ export default {
         },
 
         async mailDashboard() {
-            const url = `${baseUrl}/export/mail`;
+            const url = `${baseUrl}/export/mail-dashboard`;
             const headerText = this.getHeaderText();
             const chartConfigs = Object.values(this.chartConfig);
             const { mailId } = this;
@@ -260,7 +260,7 @@ export default {
         },
 
         async exportDashboard() {
-            const url = `${baseUrl}/export/singlepage`;
+            const url = `${baseUrl}/export/download-dashboard`;
             const headerText = this.getHeaderText();
             const chartConfigs = Object.values(this.chartConfig);
 

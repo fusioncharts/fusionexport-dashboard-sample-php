@@ -1,16 +1,16 @@
 <template>
-    <div class="export-handle">
-        <div class="export-handle-header">Export full dashboards as PDF using <a href="https://www.fusioncharts.com/fusionexport" alt="FusionExport" target="_blank">FusionExport</a>. Try below.</div>
-
-        <div class="export-handle-button-wrapper">
+     <!-- <div class="export-handle">  -->
+        <!-- <div class="export-handle-header">Export full dashboards as PDF using <a href="https://www.fusioncharts.com/fusionexport" alt="FusionExport" target="_blank">FusionExport</a>. Try below.</div>
+ -->
+        <!-- <div class="export-handle-button-wrapper"> -->
             <button
                 type="button"
                 class="btn export-handle-button"
                 @click="exportClickListener">
                 <i class="icn icn-download"/>
-                <span>Download Dashboard</span>
+                <span>Export Dashboard</span>
             </button>
-            <button
+            <!-- <button
                 type="button"
                 class="btn export-handle-button"
                 @click="reportClickListener">
@@ -23,10 +23,10 @@
                 @click="mailClickListener">
                 <i class="icn icn-send"/>
                 <span>Email this Dashboard</span>
-            </button>
-        </div>
+            </button> -->
+        <!-- </div>  -->
 
-        <Modal
+        <!-- <Modal
             name="mail-form"
             classes="mail-modal"
             height="auto"
@@ -71,8 +71,8 @@
                     <p class="mail-modal-subheader">This dashboard has been emailed to you successfully. Please check <a :href="inboxLink" target="_blank">your inbox</a>.</p>
                 </div>
             </transition>
-        </Modal>
-    </div>
+        </Modal> -->
+    <!-- </div> -->
 </template>
 
 <script>
@@ -245,6 +245,7 @@ export default {
         },
 
         async exportClickListener(evt) {
+            console.log('inside the fn start')
             const button = evt.currentTarget;
             const icon = button.querySelector('i.icn');
             const downloadIconClass = 'icn-download';
@@ -257,6 +258,7 @@ export default {
 
             button.disabled = false;
             icon.classList.replace(loadingIconClass, downloadIconClass);
+            console.log('inside the fn end')
         },
 
         async exportDashboard() {
@@ -367,6 +369,7 @@ export default {
 
     &-button {
         padding: 12px 24px;
+
         display: flex;
         align-items: center;
         background: linear-gradient(90deg, #2CC7C0 0%, #59D99D 100%);
@@ -375,6 +378,7 @@ export default {
         font-weight: 600;
         font-size: 14px;
         margin-right: 15px;
+
 
         &:not(:disabled):not(.disabled):hover,
         &:not(:disabled):not(.disabled):focus {

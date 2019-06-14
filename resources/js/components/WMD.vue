@@ -73,11 +73,14 @@
                 <option value="Q3-2012">Q3-2012</option>
                 <option value="Q4-2012">Q4-2012</option>
               </select>
+               
             </div>
           </div>
         </div>
       </div>
+            <ExportHandle :filter="exportHandleFilter"/>
     </nav>
+    
     <div class="container-fluid mt-4" style="margin-bottom: 100px;">
       <div class="row">
         <main class="main-content col-lg-12 col-md-12 col-sm-12 p-0">
@@ -142,6 +145,7 @@
             </div>
             <!-- End Small Stats Blocks -->
             <!-- Chart Area -->
+                 <!-- <ExportHandle :filter="exportHandleFilter"/> -->
             <div class="row">
 
               <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
@@ -223,18 +227,19 @@
                     :previousMeasure = previousMeasure
                   />
               </div>
-
+           
             </div>
             <!-- End Chart Area -->
           </div>
         </main>
       </div>
     </div>
-    <ExportHandle :filter="exportHandleFilter"/>
+
   </div>
 </template>
 
 <script>
+
 import PageHeader from "./PageHeader.vue";
 import RenderChart from "./RenderChart.vue";
 import SmallStatsBlock from "./SmallStats.vue";
@@ -369,6 +374,48 @@ export default {
   },
 
   methods: {
+    // async exportClickListener(evt) {
+    //         const button = evt.currentTarget;
+    //         const icon = button.querySelector('i.icn');
+    //         const downloadIconClass = 'icn-download';
+    //         const loadingIconClass = 'icn-loading';
+
+    //         button.disabled = true;
+    //         icon.classList.replace(downloadIconClass, loadingIconClass);
+
+    //         await this.exportDashboard();
+
+    //         button.disabled = false;
+    //         icon.classList.replace(loadingIconClass, downloadIconClass);
+    //     },
+
+    //     async exportDashboard() {
+    //         const url = `${baseUrl}/export/download-dashboard`;
+    //         const headerText = this.getHeaderText();
+    //         const chartConfigs = Object.values(this.chartConfig);
+
+    //         const res = await axios.post(url, {
+    //             headerText,
+    //             chartConfigs,
+    //         }, {
+    //             responseType: 'blob'
+    //         });
+
+    //         download(res.data, 'Wealth Dashboard.pdf', 'application/pdf');
+    //     },
+
+    //     getHeaderText() {
+    //         const measure = this.data.filter.measure;
+    //         const prior = this.data.filter.prior;
+    //         let date = this.data.filter.date;
+
+    //         if (prior === 'Month') {
+    //             date = moment(date, 'MM-DD-YYYY').format('MMMM YYYY');
+    //         }
+
+    //         return `${measure} for ${date}`;
+    //     },
+
     setFilter(){
       this.filterApplied = this.hasFilter;
     },
@@ -451,8 +498,9 @@ export default {
         this.currentMesure = `${quarter} ${dateArray[2]}`;
         this.getPreviousQuarter(this.date)
       }
-    }
+    },
 
   }
 };
 </script>
+

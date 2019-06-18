@@ -145,7 +145,7 @@
             </div>
             <!-- End Small Stats Blocks -->
             <!-- Chart Area -->
-                 <ExportHandle :filter="exportHandleFilter"/>
+                 <!-- <ExportHandle :filter="exportHandleFilter"/> -->
             <div class="row">
 
               <div class="col-lg-6 col-md-12 col-sm-12 mb-4">

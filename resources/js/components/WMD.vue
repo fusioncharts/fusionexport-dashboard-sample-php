@@ -145,7 +145,7 @@
             </div>
             <!-- End Small Stats Blocks -->
             <!-- Chart Area -->
-                 <!-- <ExportHandle :filter="exportHandleFilter"/> -->
+                 <ExportHandle :filter="exportHandleFilter"/>
             <div class="row">
 
               <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
@@ -374,47 +374,47 @@ export default {
   },
 
   methods: {
-    // async exportClickListener(evt) {
-    //         const button = evt.currentTarget;
-    //         const icon = button.querySelector('i.icn');
-    //         const downloadIconClass = 'icn-download';
-    //         const loadingIconClass = 'icn-loading';
+    async exportClickListener(evt) {
+            const button = evt.currentTarget;
+            const icon = button.querySelector('i.icn');
+            const downloadIconClass = 'icn-download';
+            const loadingIconClass = 'icn-loading';
 
-    //         button.disabled = true;
-    //         icon.classList.replace(downloadIconClass, loadingIconClass);
+            button.disabled = true;
+            icon.classList.replace(downloadIconClass, loadingIconClass);
 
-    //         await this.exportDashboard();
+            await this.exportDashboard();
 
-    //         button.disabled = false;
-    //         icon.classList.replace(loadingIconClass, downloadIconClass);
-    //     },
+            button.disabled = false;
+            icon.classList.replace(loadingIconClass, downloadIconClass);
+        },
 
-    //     async exportDashboard() {
-    //         const url = `${baseUrl}/export/download-dashboard`;
-    //         const headerText = this.getHeaderText();
-    //         const chartConfigs = Object.values(this.chartConfig);
+        async exportDashboard() {
+            const url = `${baseUrl}/export/download-dashboard`;
+            const headerText = this.getHeaderText();
+            const chartConfigs = Object.values(this.chartConfig);
 
-    //         const res = await axios.post(url, {
-    //             headerText,
-    //             chartConfigs,
-    //         }, {
-    //             responseType: 'blob'
-    //         });
+            const res = await axios.post(url, {
+                headerText,
+                chartConfigs,
+            }, {
+                responseType: 'blob'
+            });
 
-    //         download(res.data, 'Wealth Dashboard.pdf', 'application/pdf');
-    //     },
+            download(res.data, 'Wealth Dashboard.pdf', 'application/pdf');
+        },
 
-    //     getHeaderText() {
-    //         const measure = this.data.filter.measure;
-    //         const prior = this.data.filter.prior;
-    //         let date = this.data.filter.date;
+        getHeaderText() {
+            const measure = this.data.filter.measure;
+            const prior = this.data.filter.prior;
+            let date = this.data.filter.date;
 
-    //         if (prior === 'Month') {
-    //             date = moment(date, 'MM-DD-YYYY').format('MMMM YYYY');
-    //         }
+            if (prior === 'Month') {
+                date = moment(date, 'MM-DD-YYYY').format('MMMM YYYY');
+            }
 
-    //         return `${measure} for ${date}`;
-    //     },
+            return `${measure} for ${date}`;
+        },
 
     setFilter(){
       this.filterApplied = this.hasFilter;

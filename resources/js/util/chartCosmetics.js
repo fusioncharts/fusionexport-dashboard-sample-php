@@ -3,7 +3,7 @@ import commonJs from "./common";
 let baseUrl = window.location.origin + (process.env.BASE_URL || '');
 
 if (window.location.origin.includes('localhost')) {
-  baseUrl = 'https://www.fusioncharts.com/demos/dashboards/wealth-management-dashboard-with-export';
+  baseUrl = 'https://www.fusioncharts.com/demos/dashboards/wealth-management-dashboard-using-php-laravel-with-export';
 }
 
 const chartCosmetics = {

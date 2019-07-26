@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use FusionExport\ExportManager;
 use FusionExport\ExportConfig;
+use Aws\Common\Aws;
 use Aws\S3\S3Client;
 use Aws\SES\SESClient;
 
@@ -62,7 +63,7 @@ class ExportController extends Controller
     {
         $headerText = $request->input('headerText');
         $chartConfigs = $request->input('chartConfigs');
-        
+
         $tmpl = str_replace('<%= headerText %>', $headerText, $this->singlePageTemplate);
         $tmplFile = tempnam(sys_get_temp_dir(), 'fe-');
         file_put_contents($tmplFile, $tmpl);

@@ -8,7 +8,7 @@ use FusionExport\ExportManager;
 use FusionExport\ExportConfig;
 use Aws\Common\Aws;
 use Aws\S3\S3Client;
-use Aws\SES\SESClient;
+use Aws\Ses\SesClient;
 
 class ExportController extends Controller
 {

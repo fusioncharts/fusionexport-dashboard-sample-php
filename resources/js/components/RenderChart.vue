@@ -32,6 +32,7 @@
   FusionCharts.addDep(Maps);
   FusionCharts.addDep(usa);
 
+FusionCharts.options.creditLabel = false;
   export default {
     name: "RenderChart",
     data() {

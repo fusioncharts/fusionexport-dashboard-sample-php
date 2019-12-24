@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use FusionExport\ExportManager;
 use FusionExport\ExportConfig;
+use Aws\Common\Aws;
 use Aws\S3\S3Client;
-use Aws\SES\SESClient;
+use Aws\Ses\SesClient;
 
 class ExportController extends Controller
 {
@@ -66,14 +67,12 @@ class ExportController extends Controller
         $tmpl = str_replace('<%= headerText %>', $headerText, $this->singlePageTemplate);
         $tmplFile = tempnam(sys_get_temp_dir(), 'fe-');
         file_put_contents($tmplFile, $tmpl);
-
         $exportManager = new ExportManager();
         $exportConfig = new ExportConfig();
-
         $exportConfig->set('chartConfig', $chartConfigs);
+
         $exportConfig->set('templateFilePath', $tmplFile);
         $exportConfig->set('type', 'pdf');
-
         $files = $exportManager->export($exportConfig, sys_get_temp_dir(), true);
 
         return response()->download($files[0]);
@@ -118,7 +117,6 @@ class ExportController extends Controller
     {
         $slotSep = date('ym');
         $fileUrls = [];
-        $uploadPromises = [];
 
         foreach ($files as $file) {
             $randomName = basename(tempnam('', 'fe-php-mail-')).'.png';
